@@ -109,7 +109,7 @@ singlePair::operator bool()
 	return is;
 }
 
-bool baseHand::operator>(baseHand b)
+bool baseHand::operator>(const baseHand& b)
 {
 	if (ranking > b.ranking) return true;
 	else if (ranking < b.ranking) return false;

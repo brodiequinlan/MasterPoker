@@ -5,11 +5,11 @@
 #include "Deck.hpp"
 #include <memory>
 using hand = std::vector<card>;
-MASTER_API void printHand(hand h);
-MASTER_API void printDeck(Deck::deck_type h);
-MASTER_API void printHandPtr(hand_ptr h);
+MASTER_API void printHand(const hand& h);
+MASTER_API void printDeck(const Deck::deck_type& h);
+MASTER_API void printHandPtr(const hand_ptr& h);
 MASTER_API bool contains(const hand & v, const card & c1);
 MASTER_API bool contains(const hand & v, const card & c1);
 MASTER_API bool containsRank(const hand& v, cardRank r);
 MASTER_API bool operator !=(const card& c, const card& b);
-MASTER_API bool operator ==( hand a, hand b);
+MASTER_API bool operator ==(hand a, hand b);

@@ -9,7 +9,6 @@ BOOST_AUTO_TEST_CASE(GETHAND)
 	hand_ptr gottenHand = getHand(s);
 	BOOST_CHECK(gottenHand->ranking == 8);
 
-
 	s = { card(nine,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
 	gottenHand = getHand(s);
 	BOOST_CHECK(gottenHand->ranking == 1);

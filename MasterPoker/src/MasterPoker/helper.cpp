@@ -20,21 +20,21 @@ bool containsRank(const hand & v, cardRank r)
 	}
 	return false;
 }
-void printHand(hand _hand)
+void printHand(const hand& _hand)
 {
 	for (const card c :_hand)
 	{
 		std::cout << c.rank << std::endl;
 	}
 }
-void printDeck(Deck::deck_type _hand)
+void printDeck(const Deck::deck_type& _hand)
 {
 	for (const std::shared_ptr<card> c : _hand)
 	{
 		std::cout << c->rank << "   " << c->suit << std::endl;
 	}
 }
-void printHandPtr(hand_ptr _hand)
+void printHandPtr(const hand_ptr& _hand)
 {
 	for (const card c : _hand->hand_)
 	{

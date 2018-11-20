@@ -9,7 +9,7 @@ struct MASTER_API baseHand
 	unsigned ranking;
 	std::vector<card> hand_;
 	bool is;
-	bool operator > (baseHand b);
+	bool operator > (const baseHand& b);
 };
 struct MASTER_API RoyalFlush : public baseHand
 {

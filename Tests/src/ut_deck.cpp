@@ -9,7 +9,6 @@ BOOST_AUTO_TEST_CASE(constructor)
 {
 	Deck deck;
 	BOOST_CHECK(deck.getCards().size() == 52);
-	printDeck(deck.getCards());
 
 	std::shared_ptr<card> testcard = std::make_shared<card>(ace, clubs);
 

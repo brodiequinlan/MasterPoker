@@ -6,6 +6,11 @@ Master Poker is a poker engine created to be open source and easy to use so that
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+To use with a project, add the library to your project as a reference (or manually if you want to use in different solution. )
+
+Library supports being built as DLL and statically, but if building as DLL i would recomend commenting out MP_BUILD_STATIC in Master.h as having it uncommented
+will allow some compile time optimizations to be made (enables declspec(dllexport)) on supported functions
+
 ### Prerequisites
 
 To get this software working you require VS2017+. You can probably compile it for linux; nothing here is windows proprietary but I do not provide a makefile.

@@ -1,5 +1,5 @@
 #include "hands.hpp"
-
+#include <algorithm>
 
 StraightFlush::StraightFlush(const hand& _hand, bool _is)
 {
@@ -55,6 +55,15 @@ quads::operator bool()
 flush::flush(const hand & _hand, bool _is)
 {
 	hand_ = _hand;
+	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool
+	{
+		if (lhs.rank < rhs.rank) return false;
+		if (lhs.rank > rhs.rank) return true;
+		if (lhs.suit < rhs.suit) return false;
+		if (lhs.suit > rhs.suit) return true;
+		return false;
+	};
+	std::sort(hand_.begin(), hand_.end(), cmpCardsRank);
 	is = _is;
 	ranking = 4;
 	name = "flush";
@@ -111,12 +120,15 @@ singlePair::operator bool()
 
 bool baseHand::operator>(const baseHand& b)
 {
-	if (ranking > b.ranking) return true;
-	else if (ranking < b.ranking) return false;
+	if (ranking > b.ranking) return false;
+	else if (ranking < b.ranking) return true;
 
 	if (ranking == 0)
 	{
+		if(b.ranking == 0)
 		return false;
+
+		return true;
 	}
 	else if (ranking == 1)
 	{

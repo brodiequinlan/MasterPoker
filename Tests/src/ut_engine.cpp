@@ -154,6 +154,13 @@ BOOST_AUTO_TEST_CASE(GR_PAIR)
 	hand2 = getHand(s);
 	
 	BOOST_CHECK((*hand2> *hand1));
+
+	s = { card(queen,spades),card(queen,clubs) ,card(jack,diamonds) ,card(eight,spades) ,card(seven,spades) };
+	hand1 = getHand(s);
+	s = { card(king,spades),card(king,clubs) ,card(jack,diamonds) ,card(eight,spades) ,card(seven,spades) };
+	hand2 = getHand(s);
+
+	BOOST_CHECK((*hand2> *hand1));
 }
 BOOST_AUTO_TEST_CASE(GR_HIGHCARD)
 {
@@ -173,6 +180,12 @@ BOOST_AUTO_TEST_CASE(GR_HIGHCARD)
 	s = { card(three,spades),card(five,clubs) ,card(king,diamonds) ,card(jack,spades) ,card(ace,spades) };
 	hand1 = getHand(s);
 	s = { card(three,spades),card(four,clubs) ,card(jack,diamonds) ,card(ace,spades) ,card(king,spades) };
+	hand2 = getHand(s);
+	BOOST_CHECK((*hand1> *hand2));
+
+	s = { card(king,spades),card(king,clubs) ,card(king,diamonds) ,card(four,spades) ,card(four,spades) };
+	hand1 = getHand(s);
+	s = { card(queen,spades),card(queen,clubs) ,card(four,diamonds) ,card(four,spades) ,card(ten,spades) };
 	hand2 = getHand(s);
 	BOOST_CHECK((*hand1> *hand2));
 }

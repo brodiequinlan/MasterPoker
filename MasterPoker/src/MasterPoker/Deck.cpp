@@ -1,10 +1,11 @@
 #include "Deck.hpp"
 #include <algorithm>
 #include <random>
+#include <ctime>  
 Deck::Deck()
 {
 	fill();
-	
+	std::srand(unsigned(std::time(0)));
 }
 void Deck::fill()
 {
@@ -17,9 +18,7 @@ void Deck::fill()
 }
 void Deck::shuffle()
 {
-	std::random_device rd;
-	std::mt19937 g(rd());
-	std::shuffle(Deck::cards.begin(), Deck::cards.end(), g);
+	std::random_shuffle(Deck::cards.begin(), Deck::cards.end());
 }
 const Deck::deck_type& Deck::getCards()
 {
@@ -31,13 +30,31 @@ card Deck::draw()
 	Deck::removeCard(*Deck::cards[0]);
 	return x;
 }
+bool Deck::removeCardF(card x)
+{
+	if (Deck::getCards().size() < 1) return false;
+	unsigned size = Deck::cards.size();
+	Deck::cards.erase(std::remove_if(Deck::cards.begin(), Deck::cards.end(), [x](std::shared_ptr<card> c) {return *c == x; }), Deck::cards.end());
+	return !(size == Deck::cards.size());
+}
 bool Deck::removeCard(card x)
 {
 	if (Deck::getCards().size() < 1) return false;
 	unsigned size = Deck::cards.size();
 	Deck::cards.erase(std::remove_if(Deck::cards.begin(),Deck::cards.end(),[x](std::shared_ptr<card> c) {return *c == x; }),Deck::cards.end());
+	if (size != Deck::cards.size())
+	{
+		Deck::discards.push_back(std::make_shared<card>(x));
+	}
 	return !(size == Deck::cards.size());
 }
-
+void Deck::reset()
+{
+	for (std::shared_ptr<card> c : Deck::discards)
+	{
+		Deck::cards.push_back(c);
+	}
+	Deck::discards.clear();
+}
 Deck::~Deck(){}
 

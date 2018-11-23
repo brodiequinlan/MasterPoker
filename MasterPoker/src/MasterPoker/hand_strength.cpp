@@ -479,8 +479,8 @@ TwoPair isTwoPair( hand _hand)
 		{
 			if (twoPairs.size() == 4)break;
 			count++;
-			twoPairs.push_back(card((cardRank)it->first));
-			twoPairs.push_back(card((cardRank)it->first));
+			twoPairs.push_back(card((cardRank)it->first, clubs));
+			twoPairs.push_back(card((cardRank)it->first,clubs));
 		}
 	}
 	if (count >= 2)
@@ -513,8 +513,8 @@ singlePair isPair( hand & _hand)
 		if (it->second == 2)
 		{
 			count++;
-			toret.push_back(card((cardRank)it->first));
-			toret.push_back(card((cardRank)it->first));
+			toret.push_back(card((cardRank)it->first,clubs));
+			toret.push_back(card((cardRank)it->first,clubs));
 		}
 	}
 	if (count >= 1)
@@ -550,9 +550,9 @@ highCard getHighCard( hand  _hand)
 hand_ptr getHand(hand &_hand)
 {
 	if (isRoyalFlush(_hand)) return std::make_unique<baseHand>(RoyalFlush());
-	else if (isStraightFlush(_hand)) return std::make_unique<baseHand>(isStraightFlush(_hand));
 	else if (isQuads(_hand)) return std::make_unique<baseHand>(isQuads(_hand));
 	else if (isFullHouse(_hand))return std::make_unique<baseHand>(isFullHouse(_hand));
+	else if (isStraightFlush(_hand)) return std::make_unique<baseHand>(isStraightFlush(_hand));
 	else if (isFlush(_hand))return std::make_unique<baseHand>(isFlush(_hand));
 	else if (isStraight(_hand))return std::make_unique<baseHand>(isStraight(_hand));
 	else if (isTrips(_hand))return std::make_unique<baseHand>(isTrips(_hand));

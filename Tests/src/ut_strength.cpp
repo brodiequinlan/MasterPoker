@@ -109,15 +109,15 @@ BOOST_AUTO_TEST_CASE(TRIPS)
 BOOST_AUTO_TEST_CASE(TWOPAIR)
 {
 
-	hand is = { card(ace),card(ace) ,card(queen), card(king),card(queen),card(jack),card(two) };
-	hand sb = { card(ace),card(ace) ,card(queen), card(king),card(queen) };
+	hand is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(queen,clubs),card(jack,clubs),card(two,clubs) };
+	hand sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs),card(queen,clubs), card(king,clubs) };
 	BOOST_CHECK(isTwoPair(is).is);
 	BOOST_CHECK(isTwoPair(is).hand_ == sb);
 	hand notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(!isTwoPair(notfl).is);
 
-	hand threepair = { card(ace), card(ace),card(six) ,card(six) ,card(eight) ,card(eight) };
-	hand sp = { card(ace), card(ace),card(six) ,card(eight) ,card(eight) };
+	hand threepair = { card(ace,clubs), card(ace,clubs),card(six,clubs) ,card(six,clubs) ,card(eight,clubs) ,card(eight,clubs) };
+	hand sp = { card(ace,clubs), card(ace,clubs),card(six,clubs) ,card(eight,clubs) ,card(eight,clubs) };
 	BOOST_CHECK(isTwoPair(threepair).hand_ == sp);
 
 
@@ -130,8 +130,8 @@ BOOST_AUTO_TEST_CASE(TWOPAIR)
 BOOST_AUTO_TEST_CASE(ONEPAIR)
 {
 	BOOST_ASSERT(1 == 1);
-	hand is = { card(ace),card(ace) ,card(queen), card(king),card(three),card(jack),card(two) };
-	hand sb = { card(ace),card(ace) ,card(queen), card(king),card(jack) };
+	hand is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(three,clubs),card(jack,clubs),card(two,clubs) };
+	hand sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(jack,clubs) };
 	BOOST_CHECK(isPair(is).is);
 	BOOST_CHECK(isPair(is).hand_ == sb);
 }

@@ -6,3 +6,4 @@ bool operator==(const card & lhs, const card & rhs)
 {
 	return (lhs.rank == rhs.rank && lhs.suit == rhs.suit);
 }
+

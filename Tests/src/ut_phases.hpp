@@ -19,3 +19,5 @@
 #define TEST_DECK_CONSTRUCTOR true
 #define TEST_DECK_REMOVE true
 #define TEST_DECK_DRAW true
+
+#define TEST_PARSER true

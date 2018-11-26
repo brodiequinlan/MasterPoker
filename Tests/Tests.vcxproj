@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ut_engine.cpp" />
+    <ClCompile Include="src\ut_parser.cpp" />
     <ClCompile Include="src\ut_strength.cpp" />
     <ClCompile Include="src\ut_deck.cpp" />
   </ItemGroup>

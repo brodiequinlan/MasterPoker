@@ -11,3 +11,4 @@
 #include "MasterPoker/hands.hpp"
 #include "MasterPoker/helper.hpp"
 #include "MasterPoker/Deck.hpp"
+#include "MasterPoker/Parser.h"

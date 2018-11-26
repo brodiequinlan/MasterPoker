@@ -82,7 +82,6 @@ StraightFlush isStraightFlush(const hand & _hand)
 		{
 			if (count >= 5) {
 				if (spadeCards.size() == compareSize) {
-					std::cout << "why : " << spadeCards.size() << std::endl;
 					return (StraightFlush(currentSf, true));
 				}
 			}
@@ -116,7 +115,6 @@ StraightFlush isStraightFlush(const hand & _hand)
 		{
 			if (count >= 5) {
 				if (clubCards.size() == compareSize) {
-					std::cout << "why : " << clubCards.size() << std::endl;
 					return (StraightFlush(currentSf, true));
 				}
 			}
@@ -150,7 +148,6 @@ StraightFlush isStraightFlush(const hand & _hand)
 		{
 			if (count >= 5) {
 				if (diaCards.size() == compareSize) {
-					std::cout << "why : " << diaCards.size() << std::endl;
 					return (StraightFlush(currentSf, true));
 				}
 			}
@@ -184,7 +181,6 @@ StraightFlush isStraightFlush(const hand & _hand)
 		{
 			if (count >= 5) {
 				if (hearCards.size() == compareSize) {
-					std::cout << "why : " << hearCards.size() << std::endl;
 					return (StraightFlush(currentSf, true));
 				}
 			}
@@ -396,7 +392,6 @@ Straight isStraight(const hand & _hand)
 	{
 		if (count >= 5) {
 			if (tomod.size() == compareSize) {
-				std::cout << "why : " << tomod.size() << std::endl;
 				return (Straight(currentSf, true));
 			}
 		}

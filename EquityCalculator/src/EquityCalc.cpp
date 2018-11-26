@@ -4,105 +4,145 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <mutex> 
 
-// There are other clocks, but this is usually the one you want.
-// It corresponds to CLOCK_MONOTONIC at the syscall level.
-using Clock = std::chrono::steady_clock;
-using std::chrono::time_point;
-using std::chrono::duration_cast;
-using std::chrono::nanoseconds;
-using namespace std::literals::chrono_literals;
-using std::this_thread::sleep_for;
-int main()
+
+constexpr int EXHAUSTIVE = 100000;
+constexpr int HIGH = 40000;
+constexpr int LOW = 10000;
+constexpr int TEST = 5;
+
+
+double h1Equity = 0.0;
+double h2Equity = 0.0;
+double tEquity = 0.0;
+int h1wins = 0;
+int h2wins = 0;
+int ties = 0;
+int totalRuns = 0;
+
+
+std::mutex mtx;
+
+hand p1starting;
+hand p2starting;
+
+
+void CalculateResults(int toRun)
 {
-	clock_t tStart = clock();
-	constexpr int EXHAUSTIVE = 1;
 	Deck* deck = new Deck();
-	card h1c1(king, clubs);
-	card h1c2(king, spades);
-	card h2c1(queen, diamonds);
-	card h2c2(queen, hearts);
 	
-	double h1Equity = 0.0;
-	double h2Equity = 0.0;
-	double tEquity = 0.0;
-	int h1wins = 0;
-	int h2wins = 0;
-	int ties = 0;
-	int totalRuns = 0;
-	hand p1 = { h1c1,h1c2 };
-	hand p2 = { h2c1,h2c2 };
-	hand_ptr p1_ptr = getHand(p1);
-	hand_ptr p2_ptr;
+	hand p1(p1starting);
+	hand p2(p2starting);
 
-	deck->removeCardF(h1c1);
-	deck->removeCardF(h1c2);
-	deck->removeCardF(h2c1);
-	deck->removeCardF(h2c2);
-	for (int i = 0; i < EXHAUSTIVE; ++i)
+	for (card c : p1)
 	{
-		time_point<Clock> start = Clock::now();
+		deck->removeCardF(c);
+	}
+	for (card c : p2)
+	{
+		deck->removeCardF(c);
+	}
+
+	hand_ptr p1_ptr;
+	hand_ptr p2_ptr;
+	for (int i = 0; i < toRun; ++i)
+	{
 		deck->shuffle();
-		time_point<Clock> end = Clock::now();
-		nanoseconds diff = duration_cast<nanoseconds>(end - start);
-		std::cout << "---------------------------------------------------" << std::endl;
-		std::cout << "shuffle took " << diff.count() << " ns" << std::endl;
-		std::cout << "---------------------------------------------------" << std::endl;
 
-
-		start = Clock::now();
-		for (int i = 0; i < 5; ++i)
+		for (int j = 0; j < 5; ++j)
 		{
 			card drawn = deck->draw();
-
 			p1.push_back(drawn);
 			p2.push_back(drawn);
 		}
-		end = Clock::now();
-		diff = duration_cast<nanoseconds>(end - start);
-		std::cout << "---------------------------------------------------" << std::endl;
-		std::cout << "loop took " << diff.count() << " ns" << std::endl;
-		std::cout << "---------------------------------------------------" << std::endl;
 
-		start = Clock::now();
 		p1_ptr = getHand(p1);
-		end = Clock::now();
-		diff = duration_cast<nanoseconds>(end - start);
-		std::cout << "---------------------------------------------------" << std::endl;
-		std::cout << "getHand() took " << diff.count() << " ns" << std::endl;
-		std::cout << "---------------------------------------------------" << std::endl;
 		p2_ptr = getHand(p2);
 		if (*p1_ptr > *p2_ptr)
 		{
+			mtx.lock();
 			h1wins++;
+			mtx.unlock();
 		}
 		else if (*p2_ptr > *p1_ptr)
 		{
+			mtx.lock();
 			h2wins++;
+			mtx.unlock();
 		}
 		else
 		{
+			mtx.lock();
 			ties++;
+			mtx.unlock();
 		}
+		mtx.lock();
 		totalRuns++;
+		mtx.unlock();
+
 		p1.clear();
 		p2.clear();
 
-		p1.push_back(h1c1);
-		p1.push_back(h1c2);
-		p2.push_back(h2c1);
-		p2.push_back(h2c2);
+		p1 = hand(p1starting);
+		p2 = hand(p2starting);
 		deck->reset();
 	}
+	delete deck;
+}
+
+int main()
+{
+	
+	std::string p1h;
+	std::string p2h;
+
+	std::cout << "Enter player 1 hand: ";
+	std::cin >> p1h;
+
+	std::cout << "Enter player 2 hand: ";
+	std::cin >> p2h;
+
+
+	Parser parser;
+
+	p1starting = parser.parseHand(p1h);
+	p2starting = parser.parseHand(p2h);
+
+	int runs = EXHAUSTIVE;
+
+	clock_t tStart = clock();
+
+	std::vector<std::thread> vecOfThreads;
+	for (int i = 0; i < 8; ++i)
+	{
+		vecOfThreads.push_back(std::thread(CalculateResults,EXHAUSTIVE/8));
+	}
+	for (std::thread & th : vecOfThreads)
+	{
+		// If thread Object is Joinable then Join that thread.
+		if (th.joinable())
+			th.join();
+	}
+
+
+	
+	
+	
 	h1Equity = (double)h1wins / (double)totalRuns * 100;
 	h2Equity = (double)h2wins / (double)totalRuns * 100;
 	tEquity = (double)ties / (double)totalRuns * 100;
+
+ 	std::cout << "-----------------------------------------------------------------------------------------" << std::endl;
+	std::cout << "Total Time taken: " << (double)(clock() - tStart) / CLOCKS_PER_SEC << std::endl;
 	std::cout << "-----------------------------------------------------------------------------------------" << std::endl;
-	std::cout << h1Equity << std::endl;
+	std::cout << "Hand 1 equity: " << h1Equity << std::endl;
 	std::cout << "-----------------------------------------------------------------------------------------" << std::endl;
-	std::cout << h2Equity << std::endl;
+	std::cout << "Hand 2 equity: " << h2Equity << std::endl;
 	std::cout << "-----------------------------------------------------------------------------------------" << std::endl;
-	std::cout << tEquity << std::endl;
+	std::cout << "tie equity: " << tEquity << std::endl;
 	std::cout << "-----------------------------------------------------------------------------------------" << std::endl;
-	std::cout << "Total Time taken: "<< (double)(clock() - tStart) / CLOCKS_PER_SEC << std::endl;
+
+
+	system("pause");
 }

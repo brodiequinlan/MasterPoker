@@ -63,10 +63,6 @@ bool operator ==(hand a,hand b)
 	{
 		if (a[i] != b[i])
 		{
-			std::cout << a[i].rank << std::endl;
-			std::cout << b[i].rank << std::endl;
-			std::cout << a[i].suit << std::endl;
-			std::cout << b[i].suit << std::endl;
 			return false;
 		}
 	}

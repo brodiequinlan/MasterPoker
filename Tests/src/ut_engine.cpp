@@ -1,4 +1,5 @@
 #include <boost/test/auto_unit_test.hpp>
+
 #include "ut_phases.hpp"
 #include <Master.h>
 #include <iostream>

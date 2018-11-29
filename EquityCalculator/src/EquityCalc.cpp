@@ -5,7 +5,8 @@
 #include <thread>
 #include <iostream>
 #include <mutex> 
-
+#include <ctime>
+#include <vector>
 
 constexpr int EXHAUSTIVE = 100000;
 constexpr int HIGH = 40000;

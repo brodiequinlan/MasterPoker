@@ -2,43 +2,14 @@
 
 Master Poker is a poker engine created to be open source and easy to use so that anyone can use it to make projects.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-To use with a project, add the library to your project as a reference (or manually if you want to use in different solution. )
-
-Library supports being built as DLL and statically, but if building as DLL i would recomend commenting out MP_BUILD_STATIC in Master.h as having it uncommented
-will allow some compile time optimizations to be made (enables declspec(dllexport)) on supported functions
-
-### Prerequisites
-
-To get this software working you require VS2017+. You can probably compile it for linux; nothing here is windows proprietary but I do not provide a makefile.
-
-To get the test cases up and running you will also require boost and know how to get it working. 
-
-Dependencies (boost) have to be installed and added manually. If you don't want to manually do this, add a folder in $(SolutionDir) called dependencies. Inside this, create
-a folder called boost. Put the boost include and lib directories in here (i have put "boost" include inside $(SolutionDir)dependencies\boost\include)
-
 
 ### Installing
 
-How to run and test this software. 
-
-clone the repository
-
-```
-git clone https://github.com/brodiequinlan/MasterPoker
-```
-Open the project in VS2017+. You are pretty much done (assuming boost is included in your projects by default). At this point, I do not make a *make* system, nor have I setup post-build steps properly and therefore
-you will have to manually move the DLL produced by "MasterEngine" to the working directory of "Tests" or "Equity Calculator". I know, annoying. I would recomend building statically
-
+To install this software, clone the repo. We currently only support windows, but if you want to create a makefile there is no OS dependent code. 
 
 ## Running the tests
 
-Set the startup project to "Tests" and run. this will test the engine and make sure any changes have not broken functionality.
-
-
+Set the startup project to "Tests" and run. This requires [Boost](https://www.boost.org/) to be setup, tho boost is not a requirement for the library itself.
 
 ## Authors
 
@@ -48,6 +19,11 @@ Set the startup project to "Tests" and run. this will test the engine and make s
 ## License
 
 This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for details
+
+##Api
+
+See [API](API)
+
 
 ## Acknowledgments
 

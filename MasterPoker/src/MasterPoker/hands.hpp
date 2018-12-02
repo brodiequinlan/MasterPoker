@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "card.hpp"
-using hand = std::vector<card>;
+using hand_vector = std::vector<card>;
 struct MASTER_API baseHand
 {
 	std::string name;
@@ -23,7 +23,7 @@ struct MASTER_API RoyalFlush : public baseHand
 
 struct MASTER_API StraightFlush : public baseHand
 {
-	StraightFlush(const hand & _hand, bool _is);
+	StraightFlush(const hand_vector & _hand, bool _is);
 	operator bool();
 };
 
@@ -43,30 +43,30 @@ struct MASTER_API quads : public baseHand
 };
 struct MASTER_API highCard : public baseHand
 {
-	highCard(const hand & _hand);
+	highCard(const hand_vector & _hand);
 };
 struct MASTER_API flush : public baseHand
 {
-	flush(const hand & _hand,bool _is);
+	flush(const hand_vector & _hand,bool _is);
 	operator bool();
 };
 struct MASTER_API Straight : public baseHand
 {
-	Straight(const hand & _hand, bool _is);
+	Straight(const hand_vector & _hand, bool _is);
 	operator bool();
 };
 struct MASTER_API Trips : public baseHand
 {
-	Trips(const hand & _hand, bool _is);
+	Trips(const hand_vector & _hand, bool _is);
 	operator bool();
 };
 struct MASTER_API TwoPair : baseHand
 {
-	TwoPair(const hand & _hand, bool is);
+	TwoPair(const hand_vector & _hand, bool is);
 	operator bool();
 };
 struct MASTER_API singlePair : baseHand
 {
-	singlePair(const hand & _hand, bool is);
+	singlePair(const hand_vector & _hand, bool is);
 	operator bool();
 };

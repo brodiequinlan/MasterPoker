@@ -8,7 +8,7 @@ BOOST_AUTO_TEST_CASE(IO_TEST)
 {
 	Parser parser;
 
-	hand test = { card(ace, spades), card(ace, clubs) };
+	hand_vector test = { card(ace, spades), card(ace, clubs) };
 	
 	BOOST_CHECK(test == parser.parseHand("asac"));
 

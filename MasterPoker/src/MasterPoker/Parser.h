@@ -7,6 +7,6 @@ public:
 	Parser();
 	~Parser();
 
-	hand parseHand(std::string input);
+	hand_vector parseHand(std::string input);
 };
 

@@ -12,11 +12,11 @@ BOOST_AUTO_TEST_CASE(constructor)
 
 	std::shared_ptr<card> testcard = std::make_shared<card>(ace, clubs);
 
-	BOOST_CHECK(*deck.getCards()[12] == *testcard);
+	BOOST_CHECK(deck.getCards()[12] == *testcard);
 
 	std::shared_ptr<card> testcard2 = std::make_shared<card>(ace, hearts);
 
-	BOOST_CHECK(*deck.getCards()[51] == *testcard2);
+	BOOST_CHECK(deck.getCards()[51] == *testcard2);
 }
 #endif
 #if TEST_DECK_REMOVE
@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(draw_card)
 {
 	Deck deck;
 	deck.shuffle();
-	card x = *deck.getCards()[0];
+	card x = deck.getCards()[0];
 	card c = deck.draw();
 	BOOST_CHECK(deck.getCards().size() == 51);
 	BOOST_CHECK(x == c);

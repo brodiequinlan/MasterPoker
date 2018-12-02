@@ -4,7 +4,7 @@
 #include "helper.hpp"
 
 #include <algorithm>
-bool contains(const hand & v, const card & c1)
+bool contains(const hand_vector & v, const card & c1)
 {
 	for (const card c2 : v)
 	{
@@ -12,7 +12,7 @@ bool contains(const hand & v, const card & c1)
 	}
 	return false;
 }
-bool containsRank(const hand & v, cardRank r)
+bool containsRank(const hand_vector & v, cardRank r)
 {
 	for (const card c2 : v)
 	{
@@ -20,7 +20,7 @@ bool containsRank(const hand & v, cardRank r)
 	}
 	return false;
 }
-void printHand(const hand& _hand)
+void printHand(const hand_vector& _hand)
 {
 	for (const card c :_hand)
 	{
@@ -29,12 +29,12 @@ void printHand(const hand& _hand)
 }
 void printDeck(const Deck::deck_type& _hand)
 {
-	for (const std::shared_ptr<card> c : _hand)
+	for (const card c : _hand)
 	{
-		std::cout << c->rank << "   " << c->suit << std::endl;
+		std::cout << c.rank << "   " << c.suit << std::endl;
 	}
 }
-void printHandPtr(const hand_ptr& _hand)
+void printHandPtr(const hand& _hand)
 {
 	for (const card c : _hand->hand_)
 	{
@@ -46,7 +46,7 @@ bool operator !=(const card& c, const card& b)
 	if (c.rank == b.rank && c.suit == b.suit) return false;
 	return true;
 }
-bool operator ==(hand a,hand b)
+bool operator ==(hand_vector a,hand_vector b)
 {
 	if (a.size() != b.size()) return false;
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool

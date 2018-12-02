@@ -7,7 +7,7 @@
 class MASTER_API Deck
 {
 public:
-	using deck_type = std::vector<std::shared_ptr<card>>;
+	using deck_type = std::vector<card>;
 private:
 	deck_type cards;
 	deck_type discards;

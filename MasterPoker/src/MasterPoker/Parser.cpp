@@ -11,9 +11,9 @@ Parser::~Parser()
 {
 }
 
-hand Parser::parseHand(std::string input)
+hand_vector Parser::parseHand(std::string input)
 {
-	hand _hand;
+	hand_vector _hand;
 	cardRank rank;
 	cardSuits suit;
 	for (int i = 0; i < 4; i+=2)

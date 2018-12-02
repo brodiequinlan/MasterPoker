@@ -11,15 +11,15 @@
 #if TEST_ROYAL
 BOOST_AUTO_TEST_CASE(ROYAL)
 {
-	hand s = {card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
+	hand_vector s = {card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
 	BOOST_CHECK(isRoyalFlush(s));
-	hand c = { card(ace,clubs),card(king,clubs) ,card(queen,clubs) ,card(jack,clubs) ,card(ten,clubs) };
+	hand_vector c = { card(ace,clubs),card(king,clubs) ,card(queen,clubs) ,card(jack,clubs) ,card(ten,clubs) };
 	BOOST_CHECK(isRoyalFlush(c));
-	hand d = { card(ace,diamonds),card(king,diamonds) ,card(queen,diamonds) ,card(jack,diamonds) ,card(ten,diamonds) };
+	hand_vector d = { card(ace,diamonds),card(king,diamonds) ,card(queen,diamonds) ,card(jack,diamonds) ,card(ten,diamonds) };
 	BOOST_CHECK(isRoyalFlush(d));
-	hand h = { card(ace,hearts),card(king,hearts) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
+	hand_vector h = { card(ace,hearts),card(king,hearts) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
 	BOOST_CHECK(isRoyalFlush(h));
-	hand n = { card(ace,spades),card(king,diamonds) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
+	hand_vector n = { card(ace,spades),card(king,diamonds) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
 	BOOST_CHECK(!isRoyalFlush(n));
 }
 #endif
@@ -27,23 +27,23 @@ BOOST_AUTO_TEST_CASE(ROYAL)
 #if TEST_SF
 BOOST_AUTO_TEST_CASE(SF)
 {
-	hand s = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
+	hand_vector s = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
 	BOOST_CHECK(isStraightFlush(s).is);
-	hand c = { card(ace,clubs),card(king,clubs) ,card(queen,clubs) ,card(jack,clubs) ,card(ten,clubs) };
+	hand_vector c = { card(ace,clubs),card(king,clubs) ,card(queen,clubs) ,card(jack,clubs) ,card(ten,clubs) };
 	BOOST_CHECK(isStraightFlush(c).is);
-	hand d = { card(ace,diamonds),card(king,diamonds) ,card(queen,diamonds) ,card(jack,diamonds) ,card(ten,diamonds) };
+	hand_vector d = { card(ace,diamonds),card(king,diamonds) ,card(queen,diamonds) ,card(jack,diamonds) ,card(ten,diamonds) };
 	BOOST_CHECK(isStraightFlush(d).is);
-	hand h = { card(ace,hearts),card(king,hearts) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
+	hand_vector h = { card(ace,hearts),card(king,hearts) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
 	BOOST_CHECK(isStraightFlush(h).is);
 	
-	hand low = { card(ace,spades),card(two,spades) ,card(three,spades) ,card(four,spades) ,card(five,spades) };
+	hand_vector low = { card(ace,spades),card(two,spades) ,card(three,spades) ,card(four,spades) ,card(five,spades) };
 	BOOST_CHECK(isStraightFlush(low).is);
-	hand mid = { card(six,spades), card(nine,spades),card(ten,spades) ,card(jack,spades) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector mid = { card(six,spades), card(nine,spades),card(ten,spades) ,card(jack,spades) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(isStraightFlush(mid).is);
-	hand sup = { card(nine,spades),card(ten,spades) ,card(jack,spades) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector sup = { card(nine,spades),card(ten,spades) ,card(jack,spades) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(isStraightFlush(mid).hand_ == sup);
 
-	hand n = { card(ace,spades),card(king,diamonds) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
+	hand_vector n = { card(ace,spades),card(king,diamonds) ,card(queen,hearts) ,card(jack,hearts) ,card(ten,hearts) };
 	BOOST_CHECK(!isStraightFlush(n).is);
 }
 #endif
@@ -52,9 +52,9 @@ BOOST_AUTO_TEST_CASE(SF)
 BOOST_AUTO_TEST_CASE(QUADS)
 {
 	
-	hand low = { card(ace,spades),card(ace,diamonds) ,card(ace,hearts) ,card(two,spades) ,card(two,hearts) };
+	hand_vector low = { card(ace,spades),card(ace,diamonds) ,card(ace,hearts) ,card(two,spades) ,card(two,hearts) };
 	BOOST_CHECK(!isQuads(low).is);
-	hand mid = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector mid = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(isQuads(mid).is);
 }
 #endif
@@ -63,9 +63,9 @@ BOOST_AUTO_TEST_CASE(QUADS)
 BOOST_AUTO_TEST_CASE(FULLHOUSE)
 {
 
-	hand is = { card(ace,spades),card(ace,diamonds) ,card(ace,hearts) ,card(two,spades) ,card(two,hearts) };
+	hand_vector is = { card(ace,spades),card(ace,diamonds) ,card(ace,hearts) ,card(two,spades) ,card(two,hearts) };
 	BOOST_CHECK(isFullHouse(is).is);
-	hand notfh = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector notfh = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(!isFullHouse(notfh).is);
 }
 #endif
@@ -74,11 +74,11 @@ BOOST_AUTO_TEST_CASE(FULLHOUSE)
 BOOST_AUTO_TEST_CASE(FLUSH)
 {
 
-	hand is = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
+	hand_vector is = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(ten,spades) };
 	BOOST_CHECK(isFlush(is).is);
 	is = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,spades) ,card(two,spades),card(two,diamonds),card(two,hearts) };
 	BOOST_CHECK(isFlush(is).is);
-	hand notfl = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector notfl = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(!isFullHouse(notfl).is);
 }
 #endif
@@ -87,9 +87,9 @@ BOOST_AUTO_TEST_CASE(FLUSH)
 BOOST_AUTO_TEST_CASE(STRAIGHT)
 {
 
-	hand is = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,clubs) ,card(ten,spades) };
+	hand_vector is = { card(ace,spades),card(king,spades) ,card(queen,spades) ,card(jack,clubs) ,card(ten,spades) };
 	BOOST_CHECK(isStraight(is).is);
-	hand notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(!isStraight(notfl).is);
 }
 #endif
@@ -98,9 +98,9 @@ BOOST_AUTO_TEST_CASE(STRAIGHT)
 BOOST_AUTO_TEST_CASE(TRIPS)
 {
 
-	hand is = { card(ace,spades),card(ace,diamonds) ,card(queen,spades) ,card(jack,clubs) ,card(ace,clubs) };
+	hand_vector is = { card(ace,spades),card(ace,diamonds) ,card(queen,spades) ,card(jack,clubs) ,card(ace,clubs) };
 	BOOST_CHECK(isTrips(is).is);
-	hand notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(!isTrips(notfl).is);
 }
 #endif
@@ -109,19 +109,19 @@ BOOST_AUTO_TEST_CASE(TRIPS)
 BOOST_AUTO_TEST_CASE(TWOPAIR)
 {
 
-	hand is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(queen,clubs),card(jack,clubs),card(two,clubs) };
-	hand sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs),card(queen,clubs), card(king,clubs) };
+	hand_vector is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(queen,clubs),card(jack,clubs),card(two,clubs) };
+	hand_vector sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs),card(queen,clubs), card(king,clubs) };
 	BOOST_CHECK(isTwoPair(is).is);
 	BOOST_CHECK(isTwoPair(is).hand_ == sb);
-	hand notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
+	hand_vector notfl = { card(six,spades), card(six,spades),card(six,spades) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
 	BOOST_CHECK(!isTwoPair(notfl).is);
 
-	hand threepair = { card(ace,clubs), card(ace,clubs),card(six,clubs) ,card(six,clubs) ,card(eight,clubs) ,card(eight,clubs) };
-	hand sp = { card(ace,clubs), card(ace,clubs),card(six,clubs) ,card(eight,clubs) ,card(eight,clubs) };
+	hand_vector threepair = { card(ace,clubs), card(ace,clubs),card(six,clubs) ,card(six,clubs) ,card(eight,clubs) ,card(eight,clubs) };
+	hand_vector sp = { card(ace,clubs), card(ace,clubs),card(six,clubs) ,card(eight,clubs) ,card(eight,clubs) };
 	BOOST_CHECK(isTwoPair(threepair).hand_ == sp);
 
 
-	hand s = { card(ace,spades),card(ace,clubs) ,card(two,diamonds) ,card(two,spades) ,card(ten,spades) };
+	hand_vector s = { card(ace,spades),card(ace,clubs) ,card(two,diamonds) ,card(two,spades) ,card(ten,spades) };
 	BOOST_CHECK(isTwoPair(s).is);
 }
 #endif
@@ -130,8 +130,8 @@ BOOST_AUTO_TEST_CASE(TWOPAIR)
 BOOST_AUTO_TEST_CASE(ONEPAIR)
 {
 	BOOST_ASSERT(1 == 1);
-	hand is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(three,clubs),card(jack,clubs),card(two,clubs) };
-	hand sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(jack,clubs) };
+	hand_vector is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(three,clubs),card(jack,clubs),card(two,clubs) };
+	hand_vector sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(jack,clubs) };
 	BOOST_CHECK(isPair(is).is);
 	BOOST_CHECK(isPair(is).hand_ == sb);
 }

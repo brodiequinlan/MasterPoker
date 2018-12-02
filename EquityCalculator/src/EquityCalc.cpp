@@ -25,16 +25,16 @@ int totalRuns = 0;
 
 std::mutex mtx;
 
-hand p1starting;
-hand p2starting;
+hand_vector p1starting;
+hand_vector p2starting;
 
 
 void CalculateResults(int toRun)
 {
 	Deck* deck = new Deck();
 	
-	hand p1(p1starting);
-	hand p2(p2starting);
+	hand_vector p1(p1starting);
+	hand_vector p2(p2starting);
 
 	for (card c : p1)
 	{
@@ -45,8 +45,8 @@ void CalculateResults(int toRun)
 		deck->removeCardF(c);
 	}
 
-	hand_ptr p1_ptr;
-	hand_ptr p2_ptr;
+	hand p1_ptr;
+	hand p2_ptr;
 	for (int i = 0; i < toRun; ++i)
 	{
 		deck->shuffle();
@@ -58,8 +58,8 @@ void CalculateResults(int toRun)
 			p2.push_back(drawn);
 		}
 
-		p1_ptr = getHand(p1);
-		p2_ptr = getHand(p2);
+		p1_ptr = evalHand(p1);
+		p2_ptr = evalHand(p2);
 		if (*p1_ptr > *p2_ptr)
 		{
 			mtx.lock();
@@ -85,8 +85,8 @@ void CalculateResults(int toRun)
 		p1.clear();
 		p2.clear();
 
-		p1 = hand(p1starting);
-		p2 = hand(p2starting);
+		p1 = hand_vector(p1starting);
+		p2 = hand_vector(p2starting);
 		deck->reset();
 	}
 	delete deck;
@@ -115,9 +115,9 @@ int main()
 	clock_t tStart = clock();
 
 	std::vector<std::thread> vecOfThreads;
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 16; ++i)
 	{
-		vecOfThreads.push_back(std::thread(CalculateResults,EXHAUSTIVE/8));
+		vecOfThreads.push_back(std::thread(CalculateResults,EXHAUSTIVE/16));
 	}
 	for (std::thread & th : vecOfThreads)
 	{

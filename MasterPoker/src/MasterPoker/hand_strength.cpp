@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 #include "hand_strength.hpp"
-bool isRoyalFlush(const hand & _hand)
+bool isRoyalFlush(const hand_vector & _hand)
 {
 	card as(ace, spades);
 	card ks(king, spades);
@@ -39,12 +39,12 @@ bool isRoyalFlush(const hand & _hand)
 	return false;
 }
 
-StraightFlush isStraightFlush(const hand & _hand)
+StraightFlush isStraightFlush(const hand_vector & _hand)
 {
-	hand clubCards;
-	hand spadeCards;
-	hand diaCards;
-	hand hearCards;
+	hand_vector clubCards;
+	hand_vector spadeCards;
+	hand_vector diaCards;
+	hand_vector hearCards;
 
 	for (card c : _hand)
 	{
@@ -66,8 +66,8 @@ StraightFlush isStraightFlush(const hand & _hand)
 
 	int count = 1;
 	bool foundSf = false;
-	hand currentSf;
-	hand oldSf;
+	hand_vector currentSf;
+	hand_vector oldSf;
 	size_t compareSize = spadeCards.size() + 1;
 	if (spadeCards.size() >= 5)
 	{
@@ -206,7 +206,7 @@ StraightFlush isStraightFlush(const hand & _hand)
 	else return StraightFlush(_hand, false);
 }
 
-quads isQuads(const hand & _hand)
+quads isQuads(const hand_vector & _hand)
 {
 	cardRank quad = ace;
 	cardRank high = ace;
@@ -241,7 +241,7 @@ quads isQuads(const hand & _hand)
 	}
 }
 
-fullHouse isFullHouse(const hand & _hand)
+fullHouse isFullHouse(const hand_vector & _hand)
 {
 	std::map<cardRank, int> count;
 	bool twoCount = false, threeCount = false;
@@ -304,12 +304,12 @@ fullHouse isFullHouse(const hand & _hand)
 	}
 }
 
-flush isFlush(const hand & _hand)
+flush isFlush(const hand_vector & _hand)
 {
-	hand clubCards;
-	hand spadeCards;
-	hand diaCards;
-	hand hearCards;
+	hand_vector clubCards;
+	hand_vector spadeCards;
+	hand_vector diaCards;
+	hand_vector hearCards;
 
 	for (card c : _hand)
 	{
@@ -326,7 +326,7 @@ flush isFlush(const hand & _hand)
 	if (clubCards.size() == 5) return flush(clubCards, true);
 	else if (clubCards.size() > 5)
 	{
-		hand flu;
+		hand_vector flu;
 		std::sort(clubCards.begin(), clubCards.end(), cmpCardsRank);
 		for (size_t i = clubCards.size() - 5; i < clubCards.size(); ++i)
 		{
@@ -337,7 +337,7 @@ flush isFlush(const hand & _hand)
 	if (spadeCards.size() == 5) return flush(spadeCards, true);
 	else if (spadeCards.size() > 5)
 	{
-		hand flu;
+		hand_vector flu;
 		std::sort(spadeCards.begin(), spadeCards.end(), cmpCardsRank);
 		for (size_t i = spadeCards.size() - 5; i < spadeCards.size(); ++i)
 		{
@@ -348,7 +348,7 @@ flush isFlush(const hand & _hand)
 	if (diaCards.size() == 5) return flush(diaCards, true);
 	else if (diaCards.size() > 5)
 	{
-		hand flu;
+		hand_vector flu;
 		std::sort(diaCards.begin(), diaCards.end(), cmpCardsRank);
 		for (size_t i = diaCards.size() - 5; i < diaCards.size(); ++i)
 		{
@@ -359,7 +359,7 @@ flush isFlush(const hand & _hand)
 	if (hearCards.size() == 5) return flush(hearCards, true);
 	else if (hearCards.size() > 5)
 	{
-		hand flu;
+		hand_vector flu;
 		std::sort(hearCards.begin(), hearCards.end(), cmpCardsRank);
 		for (size_t i = hearCards.size() - 5; i < hearCards.size(); ++i)
 		{
@@ -371,15 +371,15 @@ flush isFlush(const hand & _hand)
 }
 
 
-Straight isStraight(const hand & _hand)
+Straight isStraight(const hand_vector & _hand)
 {
-	hand tomod(_hand.begin(), _hand.end());
+	hand_vector tomod(_hand.begin(), _hand.end());
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank < rhs.rank; };
 	auto rvCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
 	std::sort(tomod.begin(), tomod.end(), cmpCardsRank);
 
-	hand currentSf;
-	hand oldSf;
+	hand_vector currentSf;
+	hand_vector oldSf;
 	int count = 1;
 	bool foundSf = false;
 	size_t compareSize = tomod.size() + 1;
@@ -415,11 +415,12 @@ Straight isStraight(const hand & _hand)
 	else if (oldSf.size() == 5)return Straight(oldSf, true);
 	else return Straight(_hand, false);
 }
-Trips isTrips(hand _hand)
+Trips isTrips(const hand_vector & sentHand)
 {
+	auto _hand = hand_vector(sentHand.begin(),sentHand.end());
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank < rhs.rank; };
 	auto rvCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
-	hand potTrips;
+	hand_vector potTrips;
 	std::sort(_hand.begin(), _hand.end(), cmpCardsRank);
 	std::map<int, int> counts;
 	for (card c : _hand)
@@ -458,12 +459,13 @@ Trips isTrips(hand _hand)
 }
 
 
-TwoPair isTwoPair( hand _hand)
+TwoPair isTwoPair( const hand_vector & sentHand)
 {
+	auto _hand = hand_vector(sentHand.begin(), sentHand.end());
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
 	int count = 0;
 	std::map<int, int> counts;
-	hand twoPairs;
+	hand_vector twoPairs;
 	for (card c : _hand)
 	{
 		counts[c.rank]++;
@@ -493,8 +495,9 @@ TwoPair isTwoPair( hand _hand)
 	}
 	return TwoPair(_hand, false);
 }
-singlePair isPair( hand & _hand)
+singlePair isPair(const hand_vector & sentHand)
 {
+	hand_vector _hand(sentHand);
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
 	int count = 0;
 	std::map<int, int> counts;
@@ -514,10 +517,10 @@ singlePair isPair( hand & _hand)
 	}
 	if (count >= 1)
 	{
+		std::sort(_hand.begin(), _hand.end(), cmpCardsRank);
 		int loc_count = 0;
 		for (card c : _hand)
 		{
-			std::sort(_hand.begin(), _hand.end(), cmpCardsRank);
 			if (c.rank != toret[0].rank)
 			{
 				toret.push_back(c);
@@ -530,19 +533,20 @@ singlePair isPair( hand & _hand)
 	return singlePair(toret, false);
 }
 
-highCard getHighCard( hand  _hand)
+highCard getHighCard(const hand_vector & sentHand)
 {
+	auto _hand = hand_vector(sentHand.begin(), sentHand.end());
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
 
 	std::sort(_hand.begin(), _hand.end(), cmpCardsRank);
-	hand high;
+	hand_vector high;
 	for (int i = 0; i < 5; ++i)
 	{
 		high.push_back(_hand[i]);
 	}
 	return highCard(high);
 }
-hand_ptr getHand(hand &_hand)
+hand evalHand(const hand_vector &_hand)
 {
 	if (isRoyalFlush(_hand)) return std::make_unique<baseHand>(RoyalFlush());
 	else if (isQuads(_hand)) return std::make_unique<baseHand>(isQuads(_hand));

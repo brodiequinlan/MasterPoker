@@ -1,7 +1,7 @@
 #include "hands.hpp"
 #include <algorithm>
 
-StraightFlush::StraightFlush(const hand& _hand, bool _is)
+StraightFlush::StraightFlush(const hand_vector& _hand, bool _is)
 {
 	hand_ = _hand;
 	is = _is;
@@ -29,7 +29,7 @@ fullHouse::operator bool()
 	return is;
 }
 
-highCard::highCard(const hand & _hand)
+highCard::highCard(const hand_vector & _hand)
 {
 	hand_ = _hand;
 	ranking = 9;
@@ -52,7 +52,7 @@ quads::operator bool()
 {
 	return is;
 }
-flush::flush(const hand & _hand, bool _is)
+flush::flush(const hand_vector & _hand, bool _is)
 {
 	hand_ = _hand;
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool
@@ -72,7 +72,7 @@ flush::operator bool()
 {
 	return is;
 }
-Straight::Straight(const hand & _hand, bool _is)
+Straight::Straight(const hand_vector & _hand, bool _is)
 {
 	hand_ = _hand;
 	is = _is;
@@ -84,7 +84,7 @@ Straight::operator bool()
 	return is;
 }
 
-Trips::Trips(const hand & _hand, bool _is)
+Trips::Trips(const hand_vector & _hand, bool _is)
 {
 	hand_ = _hand;
 	is = _is;
@@ -95,7 +95,7 @@ Trips::operator bool()
 {
 	return is;
 }
-TwoPair::TwoPair(const hand & _hand, bool _is)
+TwoPair::TwoPair(const hand_vector & _hand, bool _is)
 {
 	hand_ = _hand;
 	is = _is;
@@ -106,7 +106,7 @@ TwoPair::operator bool()
 {
 	return is;
 }
-singlePair::singlePair(const hand & _hand, bool _is)
+singlePair::singlePair(const hand_vector & _hand, bool _is)
 {
 	hand_ = _hand;
 	is = _is;

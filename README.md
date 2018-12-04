@@ -9,7 +9,7 @@ To install this software, clone the repo. We currently only support windows, but
 
 ## Running the tests
 
-Set the startup project to "Tests" and run. This requires [Boost](https://www.boost.org/) to be setup, tho boost is not a requirement for the library itself.
+Set the startup project to "Tests" and run.
 
 ## Authors
 

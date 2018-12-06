@@ -49,6 +49,8 @@ void CalculateResults(int toRun)
 	hand p2_ptr;
 	for (int i = 0; i < toRun; ++i)
 	{
+		if (i % 1000 == 0)
+			std::cout << "****" << std::endl;
 		deck->shuffle();
 
 		for (int j = 0; j < 5; ++j)

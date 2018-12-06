@@ -1,7 +1,5 @@
-#include "Deck.hpp"
-#include <algorithm>
-#include <random>
-#include <ctime>  
+#include "mppch.h"
+
 Deck::Deck()
 {
 	fill();
@@ -33,14 +31,14 @@ card Deck::draw()
 bool Deck::removeCardF(card x)
 {
 	if (Deck::getCards().size() < 1) return false;
-	unsigned size = Deck::cards.size();
+	size_t size = Deck::cards.size();
 	Deck::cards.erase(std::remove_if(Deck::cards.begin(), Deck::cards.end(), [x](card c) {return c == x; }), Deck::cards.end());
 	return !(size == Deck::cards.size());
 }
 bool Deck::removeCard(card x)
 {
 	if (Deck::getCards().size() < 1) return false;
-	unsigned size = Deck::cards.size();
+	size_t size = Deck::cards.size();
 	Deck::cards.erase(std::remove_if(Deck::cards.begin(),Deck::cards.end(),[x](card c) {return c == x; }),Deck::cards.end());
 	if (size != Deck::cards.size())
 	{

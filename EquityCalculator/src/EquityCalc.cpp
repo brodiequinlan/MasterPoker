@@ -45,12 +45,10 @@ void CalculateResults(int toRun)
 		deck->removeCardF(c);
 	}
 
-	hand p1_ptr;
-	hand p2_ptr;
+	hand_ptr p1_ptr;
+	hand_ptr p2_ptr;
 	for (int i = 0; i < toRun; ++i)
 	{
-		if (i % 1000 == 0)
-			std::cout << "****" << std::endl;
 		deck->shuffle();
 
 		for (int j = 0; j < 5; ++j)
@@ -83,6 +81,9 @@ void CalculateResults(int toRun)
 		mtx.lock();
 		totalRuns++;
 		mtx.unlock();
+		
+		p1_ptr.release();
+		p2_ptr.release();
 
 		p1.clear();
 		p2.clear();

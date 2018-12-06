@@ -19,10 +19,7 @@
     <ClInclude Include="src\MasterPoker\Card.hpp" />
     <ClInclude Include="src\MasterPoker\Deck.hpp" />
     <ClInclude Include="src\Master.h" />
-    <ClInclude Include="src\MasterPoker\Core.h" />
-    <ClInclude Include="src\MasterPoker\hands.hpp" />
-    <ClInclude Include="src\MasterPoker\hand_strength.hpp" />
-    <ClInclude Include="src\MasterPoker\helper.hpp" />
+    <ClInclude Include="src\MasterPoker\Hand.hpp" />
     <ClInclude Include="src\MasterPoker\Log.h" />
     <ClInclude Include="src\MasterPoker\Parser.h" />
   </ItemGroup>
@@ -37,9 +34,7 @@
     </ClCompile>
     <ClCompile Include="src\MasterPoker\Card.cpp" />
     <ClCompile Include="src\MasterPoker\Deck.cpp" />
-    <ClCompile Include="src\MasterPoker\hands.cpp" />
-    <ClCompile Include="src\MasterPoker\hand_strength.cpp" />
-    <ClCompile Include="src\MasterPoker\helper.cpp" />
+    <ClCompile Include="src\MasterPoker\Hand.cpp" />
     <ClCompile Include="src\MasterPoker\Parser.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hands.hpp"
+#include "Hand.hpp"
 class Parser
 {
 public:

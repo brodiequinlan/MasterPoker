@@ -1,7 +1,251 @@
 #include "mppch.h"
+#include "Hand.hpp"
 
-#include "hand_strength.hpp"
+StraightFlush::StraightFlush(const hand_vector& _hand, bool _is)
+{
+	hand_ = _hand;
+	is = _is;
+	ranking = 1;
+	name = "straight flush";
+};
+StraightFlush::operator bool()
+{
+	return is;
+}
 
+fullHouse::fullHouse(cardRank _x, cardRank _fullOf, bool _is) :x(_x), fullOf(_fullOf)
+{
+	is = _is;
+	ranking = 3;
+	name = "full house";
+	hand_.push_back(card(_x));
+	hand_.push_back(card(_x));
+	hand_.push_back(card(_x));
+	hand_.push_back(card(_fullOf));
+	hand_.push_back(card(_fullOf));
+};
+fullHouse::operator bool()
+{
+	return is;
+}
+
+highCard::highCard(const hand_vector & _hand)
+{
+	hand_ = _hand;
+	ranking = 9;
+	name = "high card";
+};
+
+
+quads::quads(cardRank _fourOf, cardRank _highCard, bool _is) :fourOf(_fourOf),highCard(_highCard)
+{
+	is = _is;
+	ranking = 2;
+	name = "quads";
+	hand_.push_back(card(_fourOf));
+	hand_.push_back(card(_fourOf));
+	hand_.push_back(card(_fourOf));
+	hand_.push_back(card(_fourOf));
+	hand_.push_back(card(_highCard));
+};
+quads::operator bool()
+{
+	return is;
+}
+flush::flush(const hand_vector & _hand, bool _is)
+{
+	hand_ = _hand;
+	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool
+	{
+		if (lhs.rank < rhs.rank) return false;
+		if (lhs.rank > rhs.rank) return true;
+		if (lhs.suit < rhs.suit) return false;
+		if (lhs.suit > rhs.suit) return true;
+		return false;
+	};
+	std::sort(hand_.begin(), hand_.end(), cmpCardsRank);
+	is = _is;
+	ranking = 4;
+	name = "flush";
+};
+flush::operator bool()
+{
+	return is;
+}
+Straight::Straight(const hand_vector & _hand, bool _is)
+{
+	hand_ = _hand;
+	is = _is;
+	ranking = 5;
+	name = "straight";
+};
+Straight::operator bool()
+{
+	return is;
+}
+
+Trips::Trips(const hand_vector & _hand, bool _is)
+{
+	hand_ = _hand;
+	is = _is;
+	ranking = 6;
+	name = "3 of a kind";
+};
+Trips::operator bool()
+{
+	return is;
+}
+TwoPair::TwoPair(const hand_vector & _hand, bool _is)
+{
+	hand_ = _hand;
+	is = _is;
+	ranking = 7;
+	name = "two pair";
+}
+TwoPair::operator bool()
+{
+	return is;
+}
+singlePair::singlePair(const hand_vector & _hand, bool _is)
+{
+	hand_ = _hand;
+	is = _is;
+	ranking = 8;
+	name = "pair";
+}
+singlePair::operator bool()
+{
+	return is;
+}
+
+bool Hand::operator>(const Hand& b)
+{
+	if (ranking > b.ranking) return false;
+	else if (ranking < b.ranking) return true;
+
+	if (ranking == 0)
+	{
+		if(b.ranking == 0)
+		return false;
+
+		return true;
+	}
+	else if (ranking == 1)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		for (int i = 0; i < hand_.size(); ++i)
+		{
+			if (hand_[i].rank > b.hand_[i].rank) return true;
+			else if (hand_[i].rank < b.hand_[i].rank) return false;
+		}
+		return false;
+	}
+	else if (ranking == 2)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		if (hand_[0].rank > b.hand_[0].rank)return true;
+		else if (hand_[0].rank < b.hand_[0].rank)return false;
+		else
+		{
+			if (hand_[4].rank > b.hand_[4].rank)return true;
+			else if (hand_[4].rank < b.hand_[4].rank)return false;
+		}
+		return false;
+	}
+	else if (ranking == 3)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		if (hand_[0].rank > b.hand_[0].rank)return true;
+		else if (hand_[0].rank < b.hand_[0].rank)return false;
+		else
+		{
+			if (hand_[4].rank > b.hand_[4].rank)return true;
+			else if (hand_[4].rank < b.hand_[4].rank)return false;
+		}
+		return false;
+	}
+	else if (ranking == 4)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		for (int i = 0; i < hand_.size(); ++i)
+		{
+			if (hand_[i].rank > b.hand_[i].rank) return true;
+			else if (hand_[i].rank < b.hand_[i].rank) return false;
+		}
+		return false;
+	}
+	else if (ranking == 5)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		for (int i = 0; i < hand_.size(); ++i)
+		{
+			if (hand_[i].rank > b.hand_[i].rank) return true;
+			else if (hand_[i].rank < b.hand_[i].rank) return false;
+		}
+		return false;
+	}
+	else if (ranking == 6)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		if (hand_[0].rank > b.hand_[0].rank)return true;
+		else if (hand_[0].rank < b.hand_[0].rank)return false;
+
+		if (hand_[3].rank > b.hand_[3].rank)return true;
+		else if (hand_[3].rank < b.hand_[3].rank)return false;
+		
+		if (hand_[4].rank > b.hand_[4].rank)return true;
+		else if (hand_[4].rank < b.hand_[4].rank)return false;
+		return false;
+	}
+	else if (ranking == 7)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		if (hand_[0].rank > b.hand_[0].rank && hand_[0].rank > b.hand_[2].rank)
+		{
+			return true;
+		}
+		else if (hand_[0].rank == b.hand_[0].rank && hand_[0].rank > b.hand_[2].rank)
+		{
+			return true;
+		}
+		else if (hand_[2].rank > b.hand_[0].rank && hand_[0].rank == b.hand_[2].rank)
+		{
+			return true;
+		}
+		else if (hand_[2].rank == b.hand_[0].rank && hand_[0].rank == b.hand_[2].rank)
+		{
+			if (hand_[4].rank > b.hand_[4].rank) return true;
+		}
+		return false;
+	}
+	else if (ranking == 8)
+	{
+		//NOT EXCEPTION SAFE YET FIX LATER (eg throw ex if a.size != b.size but for now well assume input is correct
+		if (hand_[0].rank > b.hand_[0].rank)
+		{
+			return true;
+		}
+		else if (hand_[0].rank < b.hand_[0].rank)
+		{
+			return false;
+		}
+		else if (hand_[0].rank == b.hand_[0].rank)
+		{
+			if (hand_[2].rank > b.hand_[2].rank) return true;
+			else if (hand_[3].rank > b.hand_[3].rank) return true;
+			else if (hand_[4].rank > b.hand_[4].rank) return true;
+		}
+	}
+	else if (ranking == 9)
+	{
+		if (hand_[0].rank > b.hand_[0].rank) return true;
+		else if (hand_[1].rank > b.hand_[1].rank) return true;
+		else if (hand_[2].rank > b.hand_[2].rank) return true;
+		else if (hand_[3].rank > b.hand_[3].rank) return true;
+		else if (hand_[4].rank > b.hand_[4].rank) return true;
+	}
+	return false;
+}
 bool isRoyalFlush(const hand_vector & _hand)
 {
 	card as(ace, spades);
@@ -414,7 +658,7 @@ Straight isStraight(const hand_vector & _hand)
 }
 Trips isTrips(const hand_vector & sentHand)
 {
-	auto _hand = hand_vector(sentHand.begin(),sentHand.end());
+	auto _hand = hand_vector(sentHand.begin(), sentHand.end());
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank < rhs.rank; };
 	auto rvCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
 	hand_vector potTrips;
@@ -433,7 +677,7 @@ Trips isTrips(const hand_vector & sentHand)
 			}
 			for (int i = 0; i < _hand.size(); ++i)
 			{
-				
+
 			}
 		}
 	}
@@ -456,7 +700,7 @@ Trips isTrips(const hand_vector & sentHand)
 }
 
 
-TwoPair isTwoPair( const hand_vector & sentHand)
+TwoPair isTwoPair(const hand_vector & sentHand)
 {
 	auto _hand = hand_vector(sentHand.begin(), sentHand.end());
 	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool {return lhs.rank > rhs.rank; };
@@ -474,7 +718,7 @@ TwoPair isTwoPair( const hand_vector & sentHand)
 			if (twoPairs.size() == 4)break;
 			count++;
 			twoPairs.push_back(card((cardRank)it->first, clubs));
-			twoPairs.push_back(card((cardRank)it->first,clubs));
+			twoPairs.push_back(card((cardRank)it->first, clubs));
 		}
 	}
 	if (count >= 2)
@@ -508,8 +752,8 @@ singlePair isPair(const hand_vector & sentHand)
 		if (it->second == 2)
 		{
 			count++;
-			toret.push_back(card((cardRank)it->first,clubs));
-			toret.push_back(card((cardRank)it->first,clubs));
+			toret.push_back(card((cardRank)it->first, clubs));
+			toret.push_back(card((cardRank)it->first, clubs));
 		}
 	}
 	if (count >= 1)
@@ -543,16 +787,71 @@ highCard getHighCard(const hand_vector & sentHand)
 	}
 	return highCard(high);
 }
-hand evalHand(const hand_vector &_hand)
+hand_ptr evalHand(const hand_vector &_hand)
 {
-	if (isRoyalFlush(_hand)) return std::make_unique<baseHand>(RoyalFlush());
-	else if (isQuads(_hand)) return std::make_unique<baseHand>(isQuads(_hand));
-	else if (isFullHouse(_hand))return std::make_unique<baseHand>(isFullHouse(_hand));
-	else if (isStraightFlush(_hand)) return std::make_unique<baseHand>(isStraightFlush(_hand));
-	else if (isFlush(_hand))return std::make_unique<baseHand>(isFlush(_hand));
-	else if (isStraight(_hand))return std::make_unique<baseHand>(isStraight(_hand));
-	else if (isTrips(_hand))return std::make_unique<baseHand>(isTrips(_hand));
-	else if (isTwoPair(_hand))return std::make_unique<baseHand>(isTwoPair(_hand));
-	else if (isPair(_hand))return std::make_unique<baseHand>(isPair(_hand));
-	else return std::make_unique<baseHand>(getHighCard(_hand));
+	if (isRoyalFlush(_hand)) return std::make_unique<Hand>(RoyalFlush());
+	else if (isQuads(_hand)) return std::make_unique<Hand>(isQuads(_hand));
+	else if (isFullHouse(_hand))return std::make_unique<Hand>(isFullHouse(_hand));
+	else if (isStraightFlush(_hand)) return std::make_unique<Hand>(isStraightFlush(_hand));
+	else if (isFlush(_hand))return std::make_unique<Hand>(isFlush(_hand));
+	else if (isStraight(_hand))return std::make_unique<Hand>(isStraight(_hand));
+	else if (isTrips(_hand))return std::make_unique<Hand>(isTrips(_hand));
+	else if (isTwoPair(_hand))return std::make_unique<Hand>(isTwoPair(_hand));
+	else if (isPair(_hand))return std::make_unique<Hand>(isPair(_hand));
+	else return std::make_unique<Hand>(getHighCard(_hand));
+}
+
+bool operator ==(hand_vector a, hand_vector b)
+{
+	if (a.size() != b.size()) return false;
+	auto cmpCardsRank = [](const card & lhs, const card & rhs) -> bool
+	{
+		if (lhs.rank < rhs.rank) return false;
+		if (lhs.rank > rhs.rank) return true;
+		if (lhs.suit < rhs.suit) return false;
+		if (lhs.suit > rhs.suit) return true;
+		return false;
+	};
+	std::sort(a.begin(), a.end(), cmpCardsRank);
+	std::sort(b.begin(), b.end(), cmpCardsRank);
+	for (unsigned i = 0; i < a.size(); ++i)
+	{
+		if (a[i] != b[i])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+bool contains(const hand_vector & v, const card & c1)
+{
+	for (const card c2 : v)
+	{
+		if (c2 == c1) return true;
+	}
+	return false;
+}
+bool containsRank(const hand_vector & v, cardRank r)
+{
+	for (const card c2 : v)
+	{
+		if (c2.rank == r) return true;
+	}
+	return false;
+}
+std::ostream & operator<<(std::ostream & out, const hand_vector & h)
+{
+	for (const card c : h)
+	{
+		out << c.rank << std::endl;
+	}
+	return out;
+}
+
+std::ostream & operator<<(std::ostream & out, const hand_ptr & h)
+{
+	for (const card c : h->hand_)
+	{
+		std::cout << c.rank << std::endl;
+	}
 }

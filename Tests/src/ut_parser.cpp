@@ -26,8 +26,6 @@ BOOST_AUTO_TEST_CASE(IO_TEST)
 	test = { card(two, diamonds), card(three, clubs) };
 
 	BOOST_CHECK(test == parser.parseHand("2d3c"));
-
-
 }
 
 

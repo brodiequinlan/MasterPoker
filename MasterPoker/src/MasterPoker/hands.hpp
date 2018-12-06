@@ -1,9 +1,7 @@
 #pragma once
 
-#include <vector>
-#include "card.hpp"
 using hand_vector = std::vector<card>;
-struct MASTER_API baseHand
+struct  baseHand
 {
 	std::string name;
 	unsigned ranking;
@@ -11,7 +9,7 @@ struct MASTER_API baseHand
 	bool is;
 	bool operator > (const baseHand& b);
 };
-struct MASTER_API RoyalFlush : public baseHand
+struct RoyalFlush : public baseHand
 {
 	RoyalFlush()
 	{
@@ -21,51 +19,51 @@ struct MASTER_API RoyalFlush : public baseHand
 	
 };
 
-struct MASTER_API StraightFlush : public baseHand
+struct  StraightFlush : public baseHand
 {
 	StraightFlush(const hand_vector & _hand, bool _is);
 	operator bool();
 };
 
-struct MASTER_API fullHouse : public baseHand
+struct  fullHouse : public baseHand
 {
 	fullHouse(cardRank _x, cardRank _fullOf, bool _is);
 	cardRank x;
 	cardRank fullOf;
 	operator bool();
 };
-struct MASTER_API quads : public baseHand
+struct  quads : public baseHand
 {
 	quads(cardRank _fourOf, cardRank _highCard, bool _is); 
 	cardRank fourOf;
 	cardRank highCard;
 	operator bool();
 };
-struct MASTER_API highCard : public baseHand
+struct  highCard : public baseHand
 {
 	highCard(const hand_vector & _hand);
 };
-struct MASTER_API flush : public baseHand
+struct  flush : public baseHand
 {
 	flush(const hand_vector & _hand,bool _is);
 	operator bool();
 };
-struct MASTER_API Straight : public baseHand
+struct  Straight : public baseHand
 {
 	Straight(const hand_vector & _hand, bool _is);
 	operator bool();
 };
-struct MASTER_API Trips : public baseHand
+struct  Trips : public baseHand
 {
 	Trips(const hand_vector & _hand, bool _is);
 	operator bool();
 };
-struct MASTER_API TwoPair : baseHand
+struct  TwoPair : baseHand
 {
 	TwoPair(const hand_vector & _hand, bool is);
 	operator bool();
 };
-struct MASTER_API singlePair : baseHand
+struct  singlePair : baseHand
 {
 	singlePair(const hand_vector & _hand, bool is);
 	operator bool();

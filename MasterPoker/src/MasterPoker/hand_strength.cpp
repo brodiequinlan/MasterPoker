@@ -1,10 +1,7 @@
-#include <vector>
-#include <algorithm>
-#include "helper.hpp"
-#include <iostream>
-#include <map>
-#include <memory>
+#include "mppch.h"
+
 #include "hand_strength.hpp"
+
 bool isRoyalFlush(const hand_vector & _hand)
 {
 	card as(ace, spades);

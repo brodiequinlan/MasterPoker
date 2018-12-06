@@ -1,13 +1,9 @@
 #pragma once
-#include "Core.h"
-#include "card.hpp"
-#include <memory>
-#include <random>
-#include <vector>
-class MASTER_API Deck
+
+class Deck
 {
 public:
-	using deck_type = std::vector<card>;
+	 using deck_type = std::vector<card>;
 private:
 	deck_type cards;
 	deck_type discards;

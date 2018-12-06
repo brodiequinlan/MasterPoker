@@ -21,12 +21,6 @@
     <ClInclude Include="src\Master.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MasterPoker\card.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MasterPoker\enums.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\MasterPoker\hand_strength.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,11 +36,17 @@
     <ClInclude Include="src\MasterPoker\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\MasterPoker\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MasterPoker\Card.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mppch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MasterPoker\card.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\MasterPoker\hand_strength.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\MasterPoker\Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MasterPoker\Card.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mppch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

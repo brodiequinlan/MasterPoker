@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{B202BAE0-7A07-4AA7-BD4C-15D001DC10DD}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EquityCalculator", "EquityCalculator\EquityCalculator.vcxproj", "{0BA7D1CF-BC5D-4B54-B5DC-41165F0D5723}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MasterPoker", "MasterPoker\MasterPoker.vcxproj", "{D807B489-2005-4674-A6BF-80FBC315BA73}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{B202BAE0-7A07-4AA7-BD4C-15D001DC10DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

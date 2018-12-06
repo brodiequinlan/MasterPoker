@@ -15,19 +15,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mppch.h" />
+    <ClInclude Include="src\MasterPoker\Card.hpp" />
     <ClInclude Include="src\MasterPoker\Deck.hpp" />
     <ClInclude Include="src\Master.h" />
-    <ClInclude Include="src\MasterPoker\card.hpp" />
     <ClInclude Include="src\MasterPoker\Core.h" />
-    <ClInclude Include="src\MasterPoker\enums.hpp" />
     <ClInclude Include="src\MasterPoker\hands.hpp" />
     <ClInclude Include="src\MasterPoker\hand_strength.hpp" />
     <ClInclude Include="src\MasterPoker\helper.hpp" />
+    <ClInclude Include="src\MasterPoker\Log.h" />
     <ClInclude Include="src\MasterPoker\Parser.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mppch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='max_optimize|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">mppch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='max_optimize|x64'">mppch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">mppch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\MasterPoker\Card.cpp" />
     <ClCompile Include="src\MasterPoker\Deck.cpp" />
-    <ClCompile Include="src\MasterPoker\card.cpp" />
     <ClCompile Include="src\MasterPoker\hands.cpp" />
     <ClCompile Include="src\MasterPoker\hand_strength.cpp" />
     <ClCompile Include="src\MasterPoker\helper.cpp" />
@@ -83,6 +92,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>MP_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>mppch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <NoEntryPoint>false</NoEntryPoint>
@@ -97,6 +109,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>MP_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>mppch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -107,6 +122,9 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='max_optimize|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>mppch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

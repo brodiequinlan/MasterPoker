@@ -1,6 +1,5 @@
+#include "mppch.h"
 #include "hands.hpp"
-#include <algorithm>
-
 StraightFlush::StraightFlush(const hand_vector& _hand, bool _is)
 {
 	hand_ = _hand;

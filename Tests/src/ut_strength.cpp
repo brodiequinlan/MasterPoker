@@ -1,7 +1,6 @@
+#include <Master.h>
 #define BOOST_TEST_MODULE poker
 #include <boost/test/unit_test.hpp>
-
-#include <Master.h>
 #include "ut_phases.hpp"
 #include <iostream>
 
@@ -55,7 +54,7 @@ BOOST_AUTO_TEST_CASE(QUADS)
 	hand_vector low = { card(ace,spades),card(ace,diamonds) ,card(ace,hearts) ,card(two,spades) ,card(two,hearts) };
 	BOOST_CHECK(!isQuads(low).is);
 	hand_vector mid = { card(six,spades), card(six,hearts),card(six,diamonds) ,card(six,clubs) ,card(eight,spades) ,card(seven,spades) };
-	BOOST_CHECK(isQuads(mid).is);
+	BOOST_CHECK(isQuads(mid).is); 
 }
 #endif
 
@@ -133,6 +132,6 @@ BOOST_AUTO_TEST_CASE(ONEPAIR)
 	hand_vector is = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(three,clubs),card(jack,clubs),card(two,clubs) };
 	hand_vector sb = { card(ace,clubs),card(ace,clubs) ,card(queen,clubs), card(king,clubs),card(jack,clubs) };
 	BOOST_CHECK(isPair(is).is);
-	BOOST_CHECK(isPair(is).hand_ == sb);
+	BOOST_CHECK(isPair(is).hand_ == sb);  
 }
 #endif

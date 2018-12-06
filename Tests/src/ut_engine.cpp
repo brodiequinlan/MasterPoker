@@ -1,7 +1,6 @@
-#include <boost/test/auto_unit_test.hpp>
-
-#include "ut_phases.hpp"
 #include <Master.h>
+#include <boost/test/auto_unit_test.hpp>
+#include "ut_phases.hpp"
 #include <iostream>
 #if TEST_GETHAND
 BOOST_AUTO_TEST_CASE(GETHAND)

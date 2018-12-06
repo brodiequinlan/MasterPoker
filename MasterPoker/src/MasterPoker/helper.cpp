@@ -1,9 +1,6 @@
-#include <vector>
+#include "mppch.h"
 
-#include <iostream>
-#include "helper.hpp"
 
-#include <algorithm>
 bool contains(const hand_vector & v, const card & c1)
 {
 	for (const card c2 : v)

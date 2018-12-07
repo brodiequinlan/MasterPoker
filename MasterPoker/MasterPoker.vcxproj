@@ -20,10 +20,11 @@
     <ClInclude Include="src\MasterPoker\Deck.hpp" />
     <ClInclude Include="src\Master.h" />
     <ClInclude Include="src\MasterPoker\Hand.hpp" />
-    <ClInclude Include="src\MasterPoker\Log.h" />
-    <ClInclude Include="src\MasterPoker\Parser.h" />
+    <ClInclude Include="src\MasterPoker\Logger.hpp" />
+    <ClInclude Include="src\MasterPoker\Parser.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MasterPoker\Logger.cpp" />
     <ClCompile Include="src\mppch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='max_optimize|x64'">Create</PrecompiledHeader>
@@ -106,7 +107,7 @@
       <PreprocessorDefinitions>MP_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>mppch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)dependencies\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

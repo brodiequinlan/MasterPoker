@@ -71,6 +71,10 @@ hand_vector Parser::parseHand(std::string input)
 		{
 			rank = two;
 		}
+		else
+		{
+			throw std::invalid_argument("Invalid Argument: " + input);
+		}
 		if (input[i + 1] == 's')
 		{
 			suit = spades;
@@ -86,6 +90,10 @@ hand_vector Parser::parseHand(std::string input)
 		else if (input[i + 1] == 'h')
 		{
 			suit = hearts;
+		}
+		else
+		{
+			throw std::invalid_argument("Invalid argument: " + input);
 		}
 		_hand.push_back(card(rank, suit));
 	}

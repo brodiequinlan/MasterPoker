@@ -74,7 +74,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)MasterPoker\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MasterPoker\src;$(SolutionDir)dependencies\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -92,7 +92,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EqCalcApp.cpp" />
+    <ClCompile Include="src\ISOApp.cpp" />
     <ClCompile Include="src\EquityCalc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ISOApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

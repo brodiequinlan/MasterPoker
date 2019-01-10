@@ -854,4 +854,5 @@ std::ostream & operator<<(std::ostream & out, const hand_ptr & h)
 	{
 		std::cout << c.rank << std::endl;
 	}
+	return out;
 }

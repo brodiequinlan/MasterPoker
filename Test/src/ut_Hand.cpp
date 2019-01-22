@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(FLUSH)
 BOOST_AUTO_TEST_CASE(STRAIGHT)
 {
 
-	hand_vector is = { Card(ace,spades),Card(king,spades) ,Card(queen,spades) ,Card(jack,clubs) ,Card(ten,spades) };
+	hand_vector is = { Card(ace,spades),Card(king,spades) ,Card(queen,spades) ,Card(jack,clubs) ,Card(ten,spades),Card(four,clubs) ,Card(three,diamonds) };
 	BOOST_CHECK(isStraight(is).is);
 	hand_vector notfl = { Card(six,spades), Card(six,spades),Card(six,spades) ,Card(six,clubs) ,Card(eight,spades) ,Card(seven,spades) };
 	BOOST_CHECK(!isStraight(notfl).is);

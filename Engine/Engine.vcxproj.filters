@@ -27,6 +27,9 @@
     <ClCompile Include="src\Master\Deck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Master\Evaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\eng-dist\include\Master.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\eng-dist\include\Master\Deck.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\eng-dist\include\Master\Evaluator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -621,45 +621,28 @@ Straight isStraight(const hand_vector & _hand)
 {
 	hand_vector tomod(_hand.begin(), _hand.end());
 	auto cmpCardsRank = []( Card & lhs,  Card & rhs) -> bool {return lhs.getRank() < rhs.getRank(); };
-	auto rvCardsRank = []( Card & lhs,  Card & rhs) -> bool {return lhs.getRank() > rhs.getRank(); };
+	
 	std::sort(tomod.begin(), tomod.end(), cmpCardsRank);
 
-	hand_vector currentSf;
-	hand_vector oldSf;
+	hand_vector currentStraight;
+
 	int count = 1;
-	bool foundSf = false;
-	size_t compareSize = tomod.size() + 1;
-	if (tomod[0].getRank() == 2 && containsRank(tomod, ace)) {
-		tomod.erase(tomod.end() - 1);
-		currentSf.push_back(Card(ace, spades));
-		count++;
-	}
-	for (int i = 0; i < tomod.size() - 1; ++i)
+	if (containsRank(tomod, ace))
 	{
-		if (count >= 5) {
-			if (tomod.size() == compareSize) {
-				return (Straight(currentSf, true));
-			}
-		}
-		if (tomod[i + 1].getRank() - tomod[i].getRank() == 1)
-		{
-			if (currentSf.size() == 5)
-			{
-				currentSf.erase(currentSf.begin());
-			}
-			if (i == 0)currentSf.push_back(tomod[0]);
-			currentSf.push_back(tomod[i + 1]);
-			count++;
-		}
-		else {
-			count = 1;
-			oldSf = currentSf;
-			currentSf.clear();
-		}
+		//if there is an ace at the end, we must make sure we also take into account it can be at the front to make a straight as well.
+		tomod.insert(tomod.begin(), Card(ace,clubs));
 	}
-	if (currentSf.size() == 5) return (Straight(currentSf, true));
-	else if (oldSf.size() == 5)return Straight(oldSf, true);
-	else return Straight(_hand, false);
+	for (int i = 0; i < tomod.size()-1; ++i)
+	{
+		if (tomod[i + 1].getRank() - 1 == tomod[i].getRank()) count++;
+		else count = 1;
+		if (count >= 5) currentStraight = { tomod[i - 3],tomod[i - 2], tomod[i - 1], tomod[i], tomod[i+1] };
+	}
+	
+	if (currentStraight.size() == 5)
+		return Straight(currentStraight, true);
+	else
+		return Straight(_hand, false);
 }
 Trips isTrips(const hand_vector & sentHand)
 {
@@ -792,20 +775,6 @@ highCard getHighCard(const hand_vector & sentHand)
 	}
 	return highCard(high);
 }
-hand_ptr evalHand(const hand_vector &_hand)
-{
-	if (isRoyalFlush(_hand)) return std::make_unique<Hand>(RoyalFlush());
-	else if (isQuads(_hand)) return std::make_unique<Hand>(isQuads(_hand));
-	else if (isFullHouse(_hand))return std::make_unique<Hand>(isFullHouse(_hand));
-	else if (isStraightFlush(_hand)) return std::make_unique<Hand>(isStraightFlush(_hand));
-	else if (isFlush(_hand))return std::make_unique<Hand>(isFlush(_hand));
-	else if (isStraight(_hand))return std::make_unique<Hand>(isStraight(_hand));
-	else if (isTrips(_hand))return std::make_unique<Hand>(isTrips(_hand));
-	else if (isTwoPair(_hand))return std::make_unique<Hand>(isTwoPair(_hand));
-	else if (isPair(_hand))return std::make_unique<Hand>(isPair(_hand));
-	else return std::make_unique<Hand>(getHighCard(_hand));
-}
-
 bool operator ==(hand_vector a, hand_vector b)
 {
 	if (a.size() != b.size()) return false;

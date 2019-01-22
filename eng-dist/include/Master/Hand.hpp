@@ -84,7 +84,7 @@ Trips isTrips(const hand_vector & hand);
 TwoPair isTwoPair(const hand_vector & hand);
 singlePair isPair(const hand_vector & hand);
 highCard getHighCard(const hand_vector & hand);
-hand_ptr evalHand(const hand_vector & _hand);
+
 
 bool operator ==(hand_vector a, hand_vector b);
 bool contains(const hand_vector & v, const Card & c1);

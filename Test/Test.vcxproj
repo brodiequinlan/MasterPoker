@@ -89,6 +89,7 @@
     <ClCompile Include="src\ut_Card.cpp" />
     <ClCompile Include="src\ut_Deck.cpp" />
     <ClCompile Include="src\ut_Engine.cpp" />
+    <ClCompile Include="src\ut_Evaluator.cpp" />
     <ClCompile Include="src\ut_Hand.cpp" />
   </ItemGroup>
   <ItemGroup>

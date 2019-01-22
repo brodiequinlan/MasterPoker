@@ -15,3 +15,4 @@
 #include <Master/Card.hpp>
 #include <Master/Hand.hpp>
 #include <Master/Deck.hpp>
+#include <Master/Evaluator.hpp>

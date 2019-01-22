@@ -93,12 +93,14 @@
     <ClCompile Include="src\Master.cpp" />
     <ClCompile Include="src\Master\Card.cpp" />
     <ClCompile Include="src\Master\Deck.cpp" />
+    <ClCompile Include="src\Master\Evaluator.cpp" />
     <ClCompile Include="src\Master\Hand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\eng-dist\include\Master.h" />
     <ClInclude Include="..\eng-dist\include\Master\Card.hpp" />
     <ClInclude Include="..\eng-dist\include\Master\Deck.hpp" />
+    <ClInclude Include="..\eng-dist\include\Master\Evaluator.hpp" />
     <ClInclude Include="..\eng-dist\include\Master\Hand.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
